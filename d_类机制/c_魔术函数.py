@@ -235,3 +235,27 @@ if __name__ == '__main__':
         print(ch)
 
     #
+
+
+# __repr__是运行的使用调用，__str__是print的时候调用
+if __name__ == '__main__':
+    class Pair:
+
+        def __init__(self, x, y):
+            self.x = x
+            self.y = y
+
+        def __repr__(self):
+            return 'Pair({0.x!r}, {0.y!r})'.format(self)  # 注意这里0是位置
+
+        def __str__(self):
+            return '({0.x!s}, {0.y!s})'.format(self)
+
+    p = Pair(3,4)
+    p
+    print(p)
+
+    # 其中!r的作用如下，!r是使用__repr__输出
+    p = Pair(3,4)
+    print('p is {0!r}'.format(p))
+    print('p is {0}'.format(p))
