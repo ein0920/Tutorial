@@ -210,6 +210,53 @@ if __name__ == '__main__':
     d[8]
 
 
+# __getattr__
+if __name__ == '__main__':
+    '''当一般位置找不到attribute的时候，会调用getattr，返回一个值或AttributeError异常。'''
+
+
+    class C(object):
+        a = 'abc'
+
+        def __getattr__(self, name):
+            print("__getattr__() is called ")
+            return name + " from getattr"
+
+
+        def foo(self, x):
+            print(x)
+
+
+    class C2(object):
+        d = C()
+
+
+    if __name__ == '__main__':
+        c = C()
+        c2 = C2()
+        print(c.a)
+        print(c.zzzzzzzz)  # 当c中没有zzzzz这个属性的时候就会调用__getattr__()
+        c2.d
+        print(c2.d.a)
+
+
+# __setattr__
+if __name__ == '__main__':
+    class F(object):
+
+        def __setattr__(self, key, value):
+            self.__dict__[key] = value  # __dict__是实例内部用来存储属性和方法的一个字典
+
+    a = F()
+    a.__dict__
+    a.__dict__['gender'] = 'male'
+    a.gender
+    a.name = 'alex'
+    print(a.name)
+    a.__dict__
+
+
+
 # __iter__ 如果一个类要可以用for，必须有__iter__方法，而且需要在在__iter__中返回可迭代对象
 if __name__ == '__main__':
     class Node:
@@ -259,3 +306,30 @@ if __name__ == '__main__':
     p = Pair(3,4)
     print('p is {0!r}'.format(p))
     print('p is {0}'.format(p))
+
+
+# __format__
+if __name__ == '__main__':
+    _formats = {
+        'ymd': '{d.year}-{d.month}-{d.day}',
+        'mdy': '{d.month}/{d.day}/{d.year}',
+        'dmy': '{d.day}/{d.month}/{d.year}'
+    }
+
+
+    # 定义__format__方法能够让实例适用于format函数
+    class Date:
+        def __init__(self, year, month, day):
+            self.year = year
+            self.month = month
+            self.day = day
+
+        def __format__(self, code):
+            if code == '':
+                code = 'ymd'
+            fmt = _formats[code]
+            return fmt.format(d=self)
+
+
+    d = Date(2012, 12, 21)
+    format(d)
