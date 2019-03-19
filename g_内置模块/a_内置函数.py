@@ -25,41 +25,45 @@ if __name__ == '__main__':
     a = Info('Guido', 89)
     vars(a)
 
-# getattr
+
+# setattr(), getattr(), hasattr()，针对obj.x。注意与__setattr__，__getattr__区分
 if __name__ == '__main__':
-    class A(object):
-        bar = 1
 
-    a = A()
+    # getattr
+    if __name__ == '__main__':
+        class A(object):
+            bar = 1
 
-    a.bar
-    d = getattr(a, 'bar')  # 获取属性 bar 值，相当于a.bar
-    getattr(a, 'bar2')  # 属性 bar2 不存在，触发异常
+        a = A()
 
-# hasattr
-if __name__ == '__main__':
-    class test():
-        name = "xiaohua"
+        a.bar
+        d = getattr(a, 'bar')  # 获取属性 bar 值，相当于a.bar
+        getattr(a, 'bar2')  # 属性 bar2 不存在，触发异常
 
-    def run(self):
+    # hasattr
+    if __name__ == '__main__':
+        class test():
+            name = "xiaohua"
 
-        return "HelloWord"
+        def run(self):
 
-    t = test()
-    hasattr(t, "name")  # 判断对象有name属性
-    hasattr(t, "run")  # 判断对象有run方法
+            return "HelloWord"
 
-# setattr
-if __name__ == '__main__':
-    class test():
-        ...
-        name = "xiaohua"
+        t = test()
+        hasattr(t, "name")  # 判断对象有name属性
+        hasattr(t, "run")  # 判断对象有run方法
 
-    def run(self):
-        ...
-        return "HelloWord"
+    # setattr
+    if __name__ == '__main__':
+        class test():
+            ...
+            name = "xiaohua"
 
-    t = test()
-    hasattr(t, "age")  # 判断属性是否存在
-    setattr(t, "age", "18")  # 为属相赋值，并没有返回值
-    hasattr(t, "age")  # 属性存在了
+        def run(self):
+            ...
+            return "HelloWord"
+
+        t = test()
+        hasattr(t, "age")  # 判断属性是否存在
+        setattr(t, "age", "18")  # 为属相赋值，并没有返回值
+        hasattr(t, "age")  # 属性存在了

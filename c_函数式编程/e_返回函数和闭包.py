@@ -82,7 +82,7 @@ if __name__ == '__main__':
     myFunc_2 = ExFunc_2(3)
     myFunc_2()
 
-    # 需要申明nonlocal
+    # 需要申明nonlocal，这个就做成一个计数器
     def ExFunc_2(n):
         _sum = n
 
@@ -125,7 +125,7 @@ if __name__ == '__main__':
         return fs
 
 
-# 闭包的应用范例————当闭包执行完后，仍然能够保持住当前的运行环境。
+# 闭包的应用范例————1、当闭包执行完后，仍然能够保持住当前的运行环境。
 if __name__ == '__main__':
     def create():
         pos = [0,0]
